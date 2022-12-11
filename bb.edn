@@ -1,0 +1,21 @@
+{:paths []
+ :deps {}
+ ;; https://github.com/Olical/conjure/wiki/Quick-start:-Clojure#with-clojure-cli
+ ;; https://github.com/practicalli/clojure-deps-edn/blob/live/deps.edn        
+ ;; Must edit `~/.clojure/deps.edn and add :nrepl alias
+ :tasks {;; bb repl-dev
+         repl-dev {:doc "Run JVM REPL"
+                   :task (do (println "Running JVM REPL")
+                             (clojure "-M:project/dev:nrepl/interactive"))}
+
+         ;; bb test-clj
+         test-clj {:doc "Run tests via JVM clojure"
+                   :task (do (println "Running clj tests")
+                             (clojure "-M:project/dev:project/test:test-runner/jvm-clj"))}
+
+         ;; bb test-bb
+         ;; TODO: find out if this is a better way:
+         ;; https://blog.michielborkent.nl/babashka-test-runner.html
+         test-bb {:doc "Run tests via bb"
+                  :task (do (println "Running tests via Babashka")
+                            (clojure "-M:project/dev:project/test:test-runner/babashka"))}}}
